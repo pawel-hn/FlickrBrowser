@@ -1,5 +1,6 @@
 package pawel.hn.flickrbrowser
 
+import android.app.Dialog
 import android.app.SearchManager
 import android.content.Context
 import android.content.Intent
@@ -14,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_flickr.*
+import kotlinx.android.synthetic.main.dialog_about.*
 
 
 class MainActivity : AppCompatActivity(),
@@ -65,10 +67,18 @@ class MainActivity : AppCompatActivity(),
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.menu_about -> {
-
+                Log.d("PHN", "menu about clicked")
+                showAboutDialog()
             }
         }
         return true
+    }
+
+    private fun showAboutDialog() {
+        val dialog = Dialog(this)
+        dialog.setContentView(R.layout.dialog_about)
+        dialog.setCanceledOnTouchOutside(true)
+        dialog.show()
     }
 
 

@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">FlickrBrowser</string>
+    <string name="dialog_message">"Simple Flickr Browser. Based on: Android/Kotlin Masterclass course by LearnProgramming.Academy,
+ with few personal modifications"</string>
 </resources>
