@@ -8,6 +8,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
+import android.view.MenuItem
 import android.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -55,13 +56,21 @@ class MainActivity : AppCompatActivity(),
 
         val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
         (menu.findItem(R.id.app_bar_search).actionView as SearchView).apply {
-            // Assumes current activity is the searchable activity
-            
             setSearchableInfo(searchManager.getSearchableInfo(componentName))
-            isIconifiedByDefault = true // Do not iconify the widget; expand it by default
+            isIconifiedByDefault = true
         }
         return true
     }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.menu_about -> {
+
+            }
+        }
+        return true
+    }
+
 
     override fun onResume() {
         super.onResume()
