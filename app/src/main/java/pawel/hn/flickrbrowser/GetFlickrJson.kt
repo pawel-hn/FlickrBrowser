@@ -1,6 +1,9 @@
 package pawel.hn.flickrbrowser
 
+import android.content.Context
 import android.util.Log
+import android.widget.Toast
+import androidx.core.content.ContextCompat
 import java.net.URL
 
 class GetFlickrJson(private val listener: JsonDownloaded): CoroutinesAsyncTask<String, Void, String>() {
@@ -12,7 +15,18 @@ class GetFlickrJson(private val listener: JsonDownloaded): CoroutinesAsyncTask<S
 
 
     override fun doInBackground(vararg params: String?): String {
-        return URL(params[0]).readText()
+
+        var result = ""
+
+        try {
+            result = URL(params[0]).readText()
+        } catch (e: Exception) {
+
+            e.printStackTrace()
+            Log.d("PNH GetFlickrJson", "error: ${e.message}")
+        }
+
+        return result
     }
 
     override fun onPostExecute(result: String?) {

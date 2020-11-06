@@ -4,23 +4,24 @@ import android.app.Dialog
 import android.app.SearchManager
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.SearchView
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_flickr.*
-import kotlinx.android.synthetic.main.dialog_about.*
 
 
 class MainActivity : AppCompatActivity(),
     GetFlickrJson.JsonDownloaded,
     ParseFlickrJson.JsonParsed {
+
 
     private val flickrAdapter = FlickrRecyclerViewAdapter(this, ArrayList())
 
@@ -28,6 +29,8 @@ class MainActivity : AppCompatActivity(),
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
+
+        Toast.makeText(this, "hello", Toast.LENGTH_LONG).show()
 
     }
 
@@ -75,6 +78,10 @@ class MainActivity : AppCompatActivity(),
     }
 
     private fun showAboutDialog() {
+
+
+        AlertDialog.Builder(this)
+            .setView(R.layout.dialog_about).setCancelable(true).show()
         val dialog = Dialog(this)
         dialog.setContentView(R.layout.dialog_about)
         dialog.setCanceledOnTouchOutside(true)

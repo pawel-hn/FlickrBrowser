@@ -31,7 +31,7 @@ class FlickrRecyclerViewAdapter(private val context: Context, private var list: 
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         if(list.isEmpty()) {
-            holder.itemView.tvFlickrTitle.text = "no photo found"
+            holder.itemView.tvFlickrTitle.text = "no photo found - might be connection issue"
             holder.itemView.ivFlickrImage.setImageResource(R.drawable.ic_placeholder)
         } else {
             val model = list[position]
