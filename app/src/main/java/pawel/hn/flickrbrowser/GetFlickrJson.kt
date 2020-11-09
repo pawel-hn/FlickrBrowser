@@ -22,7 +22,7 @@ class GetFlickrJson(private val listener: JsonDownloaded): CoroutinesAsyncTask<S
 
     override fun onPostExecute(result: String?) {
         super.onPostExecute(result)
-        Log.d("PHN DownloadFlickrJSon", "result is $result")
+        Log.d("PHN DownloadFlickrJSon", "result ok")
         listener.jsonDownloaded(result!!)
     }
 }

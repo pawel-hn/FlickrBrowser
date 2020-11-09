@@ -41,7 +41,7 @@ class FlickrDetailActivity : BaseUtils() {
             }
         })
 
-        val photo = intent.getParcelableExtra<FlickrPhoto>(FLICKR_TRANSFER)
+        val photo = intent.getParcelableExtra<PhotoArrayGSON>(FLICKR_TRANSFER)
 
         if (photo != null) {
             tvFlickrDetailAuthor.text = photo.author
@@ -49,7 +49,7 @@ class FlickrDetailActivity : BaseUtils() {
             tvFlickrDetailTags.text = photo.tags
 
             Picasso.get()
-                .load(photo.link)
+                .load(photo.media.replaceMwithB())
                 .placeholder(R.drawable.ic_placeholder)
                 .error(R.drawable.ic_placeholder)
                 .into(ivFlickrDetail)

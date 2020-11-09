@@ -9,13 +9,12 @@ import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_flickr.view.*
-import pawel.hn.flickrbrowser.R
-import pawel.hn.flickrbrowser.FLICKR_TRANSFER
 
 
-
-class FlickrRecyclerViewAdapter(private val context: Context, private var list: List<FlickrPhoto>)
-    : RecyclerView.Adapter<MyViewHolder>(){
+class FlickrRecyclerViewAdapter(
+    private val context: Context,
+    private var list: List<PhotoArrayGSON>
+) : RecyclerView.Adapter<MyViewHolder>() {
 
     var data: List<FlickrPhoto> = ArrayList(0)
         set(value) {
@@ -30,7 +29,7 @@ class FlickrRecyclerViewAdapter(private val context: Context, private var list: 
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        if(list.isEmpty()) {
+        if (list.isEmpty()) {
             holder.itemView.tvFlickrTitle.text = "no photo found - might be connection issue"
             holder.itemView.ivFlickrImage.setImageResource(R.drawable.ic_placeholder)
         } else {
@@ -39,7 +38,7 @@ class FlickrRecyclerViewAdapter(private val context: Context, private var list: 
             holder.itemView.tvFlickrTitle.text = model.title
 
             Picasso.get()
-                .load(model.link)
+                .load(model.media.replaceMwithB())
                 .placeholder(R.drawable.ic_placeholder)
                 .error(R.drawable.ic_placeholder)
                 .fit()
@@ -54,17 +53,18 @@ class FlickrRecyclerViewAdapter(private val context: Context, private var list: 
     }
 
     override fun getItemCount(): Int {
-        return if(list.isEmpty()) 1 else list.size
+        return if (list.isEmpty()) 1 else list.size
     }
 
-    fun getFlickrImagePosition(position: Int): FlickrPhoto? {
+    fun getFlickrImagePosition(position: Int): PhotoArrayGSON? {
         return if (list.isNotEmpty()) list[position] else null
     }
-    fun loadNewData(newData: List<FlickrPhoto>) {
+
+    fun loadNewData(newData: List<PhotoArrayGSON>) {
         list = newData
         notifyDataSetChanged()
 
     }
 }
 
-class MyViewHolder(view: View): RecyclerView.ViewHolder(view)
+class MyViewHolder(view: View) : RecyclerView.ViewHolder(view)
