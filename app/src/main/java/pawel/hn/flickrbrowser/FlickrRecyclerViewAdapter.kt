@@ -16,11 +16,6 @@ class FlickrRecyclerViewAdapter(
     private var list: List<PhotoArrayGSON>
 ) : RecyclerView.Adapter<MyViewHolder>() {
 
-    var data: List<FlickrPhoto> = ArrayList(0)
-        set(value) {
-            field = value
-            notifyDataSetChanged()
-        }
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
