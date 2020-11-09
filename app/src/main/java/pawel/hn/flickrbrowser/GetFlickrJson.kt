@@ -15,23 +15,14 @@ class GetFlickrJson(private val listener: JsonDownloaded): CoroutinesAsyncTask<S
 
 
     override fun doInBackground(vararg params: String?): String {
+        Log.d("PHN", "doingbackground ${params[0]}")
 
-        var result = ""
-
-        try {
-            result = URL(params[0]).readText()
-        } catch (e: Exception) {
-
-            e.printStackTrace()
-            Log.d("PNH GetFlickrJson", "error: ${e.message}")
-        }
-
-        return result
+        return URL(params[0]).readText()
     }
 
     override fun onPostExecute(result: String?) {
         super.onPostExecute(result)
-        Log.d("PHN DownloadFlickrJSon", "result PHN")
+        Log.d("PHN DownloadFlickrJSon", "result is $result")
         listener.jsonDownloaded(result!!)
     }
 }

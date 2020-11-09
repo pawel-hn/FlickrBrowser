@@ -32,6 +32,9 @@ class MainActivity : AppCompatActivity(),
 
         Toast.makeText(this, "hello", Toast.LENGTH_LONG).show()
 
+        GetFlickrJson(this)
+            .execute("http://www.flickr.com/services/feeds/photos_public.gne?tags=trees&format=json&nojsoncallback=1")
+
     }
 
     private fun createUri(baseURL: String, searchCriteria: String, matchAll: Boolean): String {
@@ -42,28 +45,28 @@ class MainActivity : AppCompatActivity(),
     }
 
     override fun jsonDownloaded(data: String) {
-        ParseFlickrJson(this).execute(data)
+        ParseFlickrJsonGSON().execute(data)
 
     }
 
     override fun jsonParsed(data: ArrayList<FlickrPhoto>) {
-        Log.d("PHN FickrActivty", "PHN items")
-        flickrAdapter.loadNewData(data)
-        rvFlickr.layoutManager = LinearLayoutManager(this)
-        //rvFlickr.addOnItemTouchListener(RecyclerItemClickListener(this, rvFlickr, this))
-
-        rvFlickr.adapter = flickrAdapter
+//        Log.d("PHN FickrActivty", "PHN items")
+//        flickrAdapter.loadNewData(data)
+//        rvFlickr.layoutManager = LinearLayoutManager(this)
+//        //rvFlickr.addOnItemTouchListener(RecyclerItemClickListener(this, rvFlickr, this))
+//
+//        rvFlickr.adapter = flickrAdapter
     }
 
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.flickr_search_menu, menu)
 
-        val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
-        (menu.findItem(R.id.app_bar_search).actionView as SearchView).apply {
-            setSearchableInfo(searchManager.getSearchableInfo(componentName))
-            isIconifiedByDefault = true
-        }
+//        val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
+//        (menu.findItem(R.id.app_bar_search).actionView as SearchView).apply {
+//            setSearchableInfo(searchManager.getSearchableInfo(componentName))
+//            isIconifiedByDefault = true
+//        }
         return true
     }
 
@@ -91,16 +94,18 @@ class MainActivity : AppCompatActivity(),
 
     override fun onResume() {
         super.onResume()
-        if (Intent.ACTION_SEARCH == intent.action) {
-            intent.getStringExtra(SearchManager.QUERY)?.also { query ->
-                tvFlickrSearchResult.text = query
-                val url = createUri(
-                    "https://www.flickr.com/services/feeds/photos_public.gne",
-                    query, true
-                )
-                GetFlickrJson(this)
-                    .execute(url)
-            }
-        }
+//        if (Intent.ACTION_SEARCH == intent.action) {
+//            intent.getStringExtra(SearchManager.QUERY)?.also { query ->
+//                tvFlickrSearchResult.text = query
+//                val url = createUri(
+//                    "https://www.flickr.com/services/feeds/photos_public.gne",
+//                    query, true
+//                )
+//                GetFlickrJson(this)
+//                    .execute(url)
+//            }
+//        }
+
+
     }
 }
